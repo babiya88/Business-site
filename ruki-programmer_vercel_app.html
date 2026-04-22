@@ -1,0 +1,3720 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Ruki Programmer - Ethical Hacking &amp; Cyber Security
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Share+Tech+Mono&amp;display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+      * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00ff00;
+            --secondary-color: #00cc00;
+            --accent-color: #ff00ff;
+            --dark-color: #001100;
+            --darker-color: #000a00;
+            --matrix-green: #00ff41;
+            --text-color: #e0e0e0;
+            --card-bg: rgba(0, 20, 0, 0.85);
+            --border-glow: 0 0 15px var(--primary-color);
+        }
+
+        body {
+            font-family: &#39;Share Tech Mono&#39;, monospace;
+            background-color: var(--darker-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 40, 0, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 30, 0, 0.1) 0%, transparent 20%);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: &#39;Orbitron&#39;, sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Custom Borders */
+        .border-glow {
+            border: 2px solid var(--primary-color);
+            box-shadow: var(--border-glow);
+            position: relative;
+        }
+
+        .border-glow::before {
+            content: &#39;&#39;;
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .section-border {
+            border-top: 1px solid var(--secondary-color);
+            border-bottom: 1px solid var(--secondary-color);
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.05), transparent);
+        }
+
+        /* Matrix Background Animation */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.08;
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: -1;
+        }
+
+        /* Music Player Controls - SIMPLIFIED */
+        .music-player {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .music-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border: 3px solid var(--primary-color);
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.5);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 35px rgba(0, 255, 0, 0.7);
+        }
+
+        .music-toggle.muted {
+            background: linear-gradient(45deg, #666, #999);
+            border-color: #666;
+            box-shadow: 0 0 15px rgba(102, 102, 102, 0.5);
+        }
+
+        .music-label {
+            color: var(--primary-color);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: &#39;Orbitron&#39;, sans-serif;
+            margin-top: 5px;
+            background: rgba(0, 20, 0, 0.9);
+            padding: 5px 10px;
+            border-radius: 15px;
+            border: 1px solid var(--primary-color);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Header with Background Image */
+        header {
+            background: 
+                linear-gradient(rgba(0, 10, 0, 0.9), rgba(0, 20, 0, 0.95)),
+                url(&#39;https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80&#39;);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            border-bottom: 3px solid var(--primary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-overlay {
+            background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(255, 0, 255, 0.05));
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            margin: 0;
+            text-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--primary-color);
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-icon {
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            animation: rotate 10s linear infinite, pulse 3s infinite;
+            filter: drop-shadow(0 0 10px var(--primary-color));
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile Menu Toggle Button */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a:before {
+            content: &#39;&#39;;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        nav a:hover:before {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .nav-button {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .nav-button:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            box-shadow: 0 0 25px var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(0, 30, 0, 0.8) 0%, rgba(0, 10, 0, 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: &#39;&#39;;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
+            background: linear-gradient(90deg, var(--primary-color), #00ff88, var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 18px 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            box-shadow: 0 0 35px var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Courses Section */
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin: 5rem 0 3rem;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title:after {
+            content: &#39;&#39;;
+            display: block;
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            margin: 15px auto;
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .course-card {
+            background-color: var(--card-bg);
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 255, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .course-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-height: 60px;
+        }
+
+        .course-icon {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            filter: drop-shadow(0 0 5px var(--primary-color));
+        }
+
+        .course-level {
+            display: inline-block;
+            background-color: rgba(0, 255, 0, 0.1);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            border: 1px solid var(--primary-color);
+        }
+
+        /* Order Now Button */
+        .order-now-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-color);
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .order-now-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.4);
+        }
+
+        /* Services Section - Course Services */
+        .services-section {
+            padding: 6rem 0;
+            background-color: rgba(0, 15, 0, 0.8);
+            position: relative;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background-color: rgba(0, 25, 0, 0.9);
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(0, 255, 0, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px var(--primary-color));
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .service-card p {
+            color: #b0b0b0;
+            line-height: 1.7;
+        }
+
+        /* NEW: Social Media Boost Section */
+        .boost-section {
+            padding: 6rem 0;
+            background-color: rgba(5, 10, 15, 0.95);
+            position: relative;
+        }
+
+        .boost-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .boost-tab {
+            background-color: rgba(10, 15, 30, 0.7);
+            border: 2px solid var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .boost-tab:hover {
+            background-color: rgba(255, 0, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .boost-tab.active {
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        .boost-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .boost-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .boost-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .boost-card {
+            background-color: rgba(10, 15, 30, 0.9);
+            border: 2px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .boost-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 0, 255, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .boost-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .boost-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            color: white;
+        }
+
+        .boost-title {
+            font-size: 1.8rem;
+            color: white;
+            margin: 0;
+        }
+
+        .boost-description {
+            color: #b0b0b0;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .boost-packages {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .boost-packages li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .boost-packages i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .boost-price {
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .boost-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .boost-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 255, 0.4);
+        }
+
+        /* Boost Images Gallery */
+        .boost-images-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .boost-image-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s;
+        }
+
+        .boost-image-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 30px rgba(255, 0, 255, 0.3);
+        }
+
+        .boost-image-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--primary-color);
+            padding: 1rem;
+            text-align: center;
+            font-family: &#39;Orbitron&#39;, sans-serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .boost-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        @media (max-width: 992px) {
+            .boost-images-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .boost-images-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Boost Order Form */
+        .boost-order-section {
+            padding: 6rem 0;
+            background-color: rgba(0, 20, 0, 0.9);
+        }
+
+        .boost-order-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(0, 30, 0, 0.8);
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+        }
+
+        .boost-order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background-color: rgba(0, 15, 0, 0.8);
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            padding: 12px 15px;
+            color: var(--text-color);
+            font-family: &#39;Share Tech Mono&#39;, monospace;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .submit-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            box-shadow: 0 0 25px var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .whatsapp-info {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: rgba(0, 255, 0, 0.05);
+            border-radius: 10px;
+            border: 1px solid var(--primary-color);
+        }
+
+        .whatsapp-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .whatsapp-number {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .contact-numbers {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-number {
+            background-color: rgba(0, 255, 0, 0.05);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 6rem 0;
+            background-color: rgba(0, 12, 0, 0.9);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: rgba(0, 25, 0, 0.8);
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:before {
+            content: &#39;&#39;;
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color), var(--primary-color));
+            z-index: -1;
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .feature-card:hover:before {
+            opacity: 1;
+        }
+
+        .feature-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 3rem;
+            font-weight: bold;
+            color: rgba(0, 255, 0, 0.1);
+            font-family: &#39;Orbitron&#39;, sans-serif;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-icon {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        /* Social Media Section */
+        .social-section {
+            padding: 5rem 0;
+            background-color: rgba(0, 20, 0, 0.9);
+            position: relative;
+        }
+
+        .social-container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s;
+            padding: 2rem 1rem;
+            border-radius: 10px;
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+            background-color: rgba(0, 255, 0, 0.05);
+            border-color: var(--primary-color);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+        }
+
+        .social-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover .social-icon {
+            transform: scale(1.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 8, 0, 0.95);
+            padding: 4rem 0 2rem;
+            border-top: 3px solid var(--primary-color);
+            position: relative;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: &#39;&#39;;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .footer-links i {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--primary-color);
+            font-family: &#39;Orbitron&#39;, sans-serif;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 255, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .copyright {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Stats Counter */
+        .stats-section {
+            padding: 4rem 0;
+            background-color: rgba(0, 20, 0, 0.7);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-card {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-family: &#39;Orbitron&#39;, sans-serif;
+            text-shadow: 0 0 15px var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 255, 0, 0.2);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            box-shadow: 0 0 20px var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design - Mobile Menu */
+        @media (max-width: 992px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background-color: rgba(0, 15, 0, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 100px;
+                gap: 1.5rem;
+                transition: right 0.5s ease;
+                z-index: 1000;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+                border-left: 3px solid var(--primary-color);
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav ul li {
+                width: 80%;
+                text-align: center;
+            }
+
+            nav a {
+                display: block;
+                padding: 15px;
+                width: 100%;
+                font-size: 1.2rem;
+                border: 1px solid rgba(0, 255, 0, 0.2);
+            }
+
+            .nav-container {
+                gap: 1rem;
+            }
+
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+
+            /* Music Player Mobile */
+            .music-player {
+                bottom: 80px;
+                right: 20px;
+            }
+
+            .music-toggle {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .music-label {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .courses-grid, .services-grid, .features-grid, .social-links, .boost-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2.8rem;
+            }
+
+            .boost-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .boost-tab {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            /* Music Player Mobile */
+            .music-player {
+                bottom: 70px;
+                right: 15px;
+            }
+
+            .music-toggle {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            .music-label {
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+
+            .logo-icon {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .contact-numbers {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-number {
+                min-width: 100%;
+            }
+
+            /* Music Player Mobile */
+            .music-player {
+                bottom: 60px;
+                right: 10px;
+            }
+
+            .music-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .music-label {
+                font-size: 8px;
+            }
+        }
+
+        /* Modal for Course Details */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border: 3px solid var(--primary-color);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 255, 0, 0.5);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+            color: var(--accent-color);
+        }
+
+        .modal-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .modal-description {
+            color: #b0b0b0;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .modal-features {
+            margin-bottom: 2rem;
+        }
+
+        .modal-features h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .modal-features ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .modal-features li {
+            color: #b0b0b0;
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        .modal-features li:before {
+            content: &#39;✓&#39;;
+            color: var(--primary-color);
+            position: absolute;
+            left: -1.5rem;
+            font-weight: bold;
+        }
+
+        .modal-price {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            text-align: center;
+            margin: 2rem 0;
+            text-shadow: 0 0 15px var(--primary-color);
+        }
+
+        .modal-order-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-color);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1.5rem;
+        }
+
+        .modal-order-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 255, 0, 0.4);
+        }
+
+        /* WhatsApp Order Button Styling */
+        .whatsapp-order-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .whatsapp-order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Music Player - SIMPLIFIED -->
+    <div class="music-player">
+      <button class="music-toggle" id="musicToggle">
+        <i class="fas fa-volume-up"></i>
+      </button>
+      <div class="music-label" id="musicLabel">
+        MUSIC ON
+      </div>
+    </div>
+    <!-- Audio Element -->
+    <audio id="backgroundMusic" loop="">
+      <source src="bg.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    <!-- Matrix Background Animation -->
+    <canvas id="matrix-bg">
+    </canvas>
+    <!-- Particles Background -->
+    <div id="particles-js">
+    </div>
+    <!-- Header with Background Image -->
+    <header class="border-glow">
+      <div class="header-overlay">
+      </div>
+      <div class="container nav-container">
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-user-secret"></i>
+          </div>
+          <h1>
+            RUKI PROGRAMMER
+          </h1>
+        </div>
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+          <ul id="navMenu">
+            <li>
+              <a href="#home">              <i class="fas fa-home"></i>
+              Home
+</a>
+            </li>
+            <li>
+              <a href="#courses">              <i class="fas fa-graduation-cap"></i>
+              Courses
+</a>
+            </li>
+            <li>
+              <a href="#services">              <i class="fas fa-cogs"></i>
+              Services
+</a>
+            </li>
+            <li>
+              <a href="#boost">              <i class="fas fa-rocket"></i>
+              Social Boost
+</a>
+            </li>
+            <li>
+              <a href="#order">              <i class="fas fa-shopping-cart"></i>
+              Order Courses
+</a>
+            </li>
+            <li>
+              <a href="#social">              <i class="fas fa-share-alt"></i>
+              Connect
+</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero section-border" id="home">
+      <div class="container hero-content">
+        <h2 class="animate__animated animate__fadeInDown">
+          WELCOME TO MY WEBSITE
+        </h2>
+        <p class="animate__animated animate__fadeInUp">
+          Become a
+          <span class="highlight">          Complete Expert Hacker
+</span>
+          with our comprehensive cyber security and ethical hacking training programs. Master
+          <span class="highlight">          Kali Linux, Termux, Dark Web
+</span>
+          , and advanced penetration testing techniques with hands-on practical experience.
+        </p>
+        <a href="#boost" class="cta-button animate__animated animate__pulse animate__infinite">        Boost Social Media
+</a>
+      </div>
+    </section>
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" data-count="100">
+              0
+            </div>
+            <h3>
+              Premium Courses
+            </h3>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-count="5000">
+              0
+            </div>
+            <h3>
+              Students Trained
+            </h3>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-count="10000">
+              0
+            </div>
+            <h3>
+              Social Media Boosts
+            </h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Courses Section -->
+    <section id="courses" class="section-border">
+      <div class="container">
+        <h2 class="section-title">
+          Our Premium Courses
+        </h2>
+        <div class="courses-grid">
+          <!-- Course cards will be generated by JavaScript -->
+        </div>
+      </div>
+    </section>
+    <!-- Services Section (Course Services) -->
+    <section class="services-section" id="services">
+      <div class="container">
+        <h2 class="section-title">
+          Our Services
+        </h2>
+        <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">
+          We provide comprehensive ethical hacking and cyber security services including:
+        </p>
+        <div class="services-grid">
+          <!-- Service cards will be generated by JavaScript -->
+        </div>
+      </div>
+    </section>
+    <!-- Social Media Boost Section -->
+    <section class="boost-section section-border" id="boost">
+      <div class="container">
+        <h2 class="section-title">
+          Social Media Boost Services
+        </h2>
+        <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">
+          Boost your social media presence with real, active followers, likes, and views. Instant delivery guaranteed!
+        </p>
+        <div class="boost-tabs">
+          <div class="boost-tab active" data-tab="facebook">
+            <i class="fab fa-facebook"></i>
+            Facebook
+          </div>
+          <div class="boost-tab" data-tab="instagram">
+            <i class="fab fa-instagram"></i>
+            Instagram
+          </div>
+          <div class="boost-tab" data-tab="tiktok">
+            <i class="fab fa-tiktok"></i>
+            TikTok
+          </div>
+          <div class="boost-tab" data-tab="youtube">
+            <i class="fab fa-youtube"></i>
+            YouTube
+          </div>
+          <div class="boost-tab" data-tab="recovery">
+            <i class="fas fa-user-shield"></i>
+            Account Recovery
+          </div>
+        </div>
+        <!-- Facebook Boost Content -->
+        <div id="facebook-content" class="boost-content active">
+          <div class="boost-grid">
+            <div class="boost-card" data-service="Facebook Followers">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <h3 class="boost-title">
+                  Facebook Followers
+                </h3>
+              </div>
+              <p class="boost-description">
+                Real and active Facebook followers to grow your page presence
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  1000 Followers - Rs. 1000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  5000 Followers - Rs. 4000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  10000 Followers - Rs. 7000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  50000 Followers - Rs. 30000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 1000
+              </div>
+              <button class="boost-btn" data-service="Facebook Followers">
+                Order Now
+              </button>
+            </div>
+            <div class="boost-card" data-service="Facebook Likes">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fas fa-thumbs-up"></i>
+                </div>
+                <h3 class="boost-title">
+                  Facebook Likes
+                </h3>
+              </div>
+              <p class="boost-description">
+                Instant likes for your Facebook posts and pages
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  1000 Likes - Rs. 800
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  5000 Likes - Rs. 3500
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  10000 Likes - Rs. 6000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  50000 Likes - Rs. 25000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 800
+              </div>
+              <button class="boost-btn" data-service="Facebook Likes">
+                Order Now
+              </button>
+            </div>
+            <div class="boost-card" data-service="Facebook Video Views">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fas fa-play-circle"></i>
+                </div>
+                <h3 class="boost-title">
+                  Facebook Video Views
+                </h3>
+              </div>
+              <p class="boost-description">
+                Increase video views for Facebook videos
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  1000 Views - Rs. 500
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  10000 Views - Rs. 4000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  50000 Views - Rs. 15000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  100000 Views - Rs. 25000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 500
+              </div>
+              <button class="boost-btn" data-service="Facebook Video Views">
+                Order Now
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Instagram Boost Content -->
+        <div id="instagram-content" class="boost-content">
+          <div class="boost-grid">
+            <div class="boost-card" data-service="Instagram Followers">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <h3 class="boost-title">
+                  Instagram Followers
+                </h3>
+              </div>
+              <p class="boost-description">
+                Real Instagram followers with profile pictures
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  1000 Followers - Rs. 1200
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  5000 Followers - Rs. 5000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  10000 Followers - Rs. 8000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  50000 Followers - Rs. 35000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 1200
+              </div>
+              <button class="boost-btn" data-service="Instagram Followers">
+                Order Now
+              </button>
+            </div>
+            <div class="boost-card" data-service="Instagram Likes">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="boost-title">
+                  Instagram Likes
+                </h3>
+              </div>
+              <p class="boost-description">
+                High-quality likes for Instagram posts
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  1000 Likes - Rs. 1000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  5000 Likes - Rs. 4000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  10000 Likes - Rs. 7000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  50000 Likes - Rs. 30000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 1000
+              </div>
+              <button class="boost-btn" data-service="Instagram Likes">
+                Order Now
+              </button>
+            </div>
+            <div class="boost-card" data-service="Instagram Views">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <h3 class="boost-title">
+                  Instagram Views
+                </h3>
+              </div>
+              <p class="boost-description">
+                Boost views for Instagram Reels and Videos
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  1000 Views - Rs. 600
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  10000 Views - Rs. 5000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  50000 Views - Rs. 20000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  100000 Views - Rs. 35000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 600
+              </div>
+              <button class="boost-btn" data-service="Instagram Views">
+                Order Now
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- TikTok Boost Content -->
+        <div id="tiktok-content" class="boost-content">
+          <div class="boost-grid">
+            <div class="boost-card" data-service="TikTok Followers">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <h3 class="boost-title">
+                  TikTok Followers
+                </h3>
+              </div>
+              <p class="boost-description">
+                Real TikTok followers for your profile
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  1000 Followers - Rs. 1500
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  5000 Followers - Rs. 6000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  10000 Followers - Rs. 10000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  50000 Followers - Rs. 40000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 1500
+              </div>
+              <button class="boost-btn" data-service="TikTok Followers">
+                Order Now
+              </button>
+            </div>
+            <div class="boost-card" data-service="TikTok Likes">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="boost-title">
+                  TikTok Likes
+                </h3>
+              </div>
+              <p class="boost-description">
+                Increase likes on TikTok videos
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  1000 Likes - Rs. 1200
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  5000 Likes - Rs. 5000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  10000 Likes - Rs. 8000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  50000 Likes - Rs. 35000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 1200
+              </div>
+              <button class="boost-btn" data-service="TikTok Likes">
+                Order Now
+              </button>
+            </div>
+            <div class="boost-card" data-service="TikTok Views">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <h3 class="boost-title">
+                  TikTok Views
+                </h3>
+              </div>
+              <p class="boost-description">
+                Boost views for TikTok videos
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  1000 Views - Rs. 800
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  10000 Views - Rs. 6000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  50000 Views - Rs. 25000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  100000 Views - Rs. 45000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 800
+              </div>
+              <button class="boost-btn" data-service="TikTok Views">
+                Order Now
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- YouTube Boost Content -->
+        <div id="youtube-content" class="boost-content">
+          <div class="boost-grid">
+            <div class="boost-card" data-service="YouTube Subscribers">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <h3 class="boost-title">
+                  YouTube Subscribers
+                </h3>
+              </div>
+              <p class="boost-description">
+                Real YouTube subscribers for your channel
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  1000 Subscribers - Rs. 3000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  5000 Subscribers - Rs. 12000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  10000 Subscribers - Rs. 20000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  50000 Subscribers - Rs. 80000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 3000
+              </div>
+              <button class="boost-btn" data-service="YouTube Subscribers">
+                Order Now
+              </button>
+            </div>
+            <div class="boost-card" data-service="YouTube Views">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <h3 class="boost-title">
+                  YouTube Views
+                </h3>
+              </div>
+              <p class="boost-description">
+                Increase views on YouTube videos
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  1000 Views - Rs. 1000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  10000 Views - Rs. 8000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  50000 Views - Rs. 35000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  100000 Views - Rs. 60000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 1000
+              </div>
+              <button class="boost-btn" data-service="YouTube Views">
+                Order Now
+              </button>
+            </div>
+            <div class="boost-card" data-service="YouTube Likes">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fas fa-thumbs-up"></i>
+                </div>
+                <h3 class="boost-title">
+                  YouTube Likes
+                </h3>
+              </div>
+              <p class="boost-description">
+                More likes for your YouTube videos
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  1000 Likes - Rs. 1500
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  5000 Likes - Rs. 6000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  10000 Likes - Rs. 10000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  50000 Likes - Rs. 40000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 1500
+              </div>
+              <button class="boost-btn" data-service="YouTube Likes">
+                Order Now
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Account Recovery Content -->
+        <div id="recovery-content" class="boost-content">
+          <div class="boost-grid">
+            <div class="boost-card" data-service="Facebook Account Recovery">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fab fa-facebook"></i>
+                </div>
+                <h3 class="boost-title">
+                  Facebook Account Recovery
+                </h3>
+              </div>
+              <p class="boost-description">
+                Recover hacked or disabled Facebook accounts
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  Basic Recovery - Rs. 5000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  Full Recovery with Backup - Rs. 10000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  Business Account Recovery - Rs. 15000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  Urgent Recovery (24 hours) - Rs. 20000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 5000
+              </div>
+              <button class="boost-btn" data-service="Facebook Account Recovery">
+                Order Now
+              </button>
+            </div>
+            <div class="boost-card" data-service="Instagram Account Recovery">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fab fa-instagram"></i>
+                </div>
+                <h3 class="boost-title">
+                  Instagram Account Recovery
+                </h3>
+              </div>
+              <p class="boost-description">
+                Recover hacked or disabled Instagram accounts
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  Basic Recovery - Rs. 4000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  Full Recovery with Backup - Rs. 8000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  Business Account Recovery - Rs. 12000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  Urgent Recovery (24 hours) - Rs. 15000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 4000
+              </div>
+              <button class="boost-btn" data-service="Instagram Account Recovery">
+                Order Now
+              </button>
+            </div>
+            <div class="boost-card" data-service="WhatsApp Account Recovery">
+              <div class="boost-header">
+                <div class="boost-icon">
+                  <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3 class="boost-title">
+                  WhatsApp Account Recovery
+                </h3>
+              </div>
+              <p class="boost-description">
+                Recover lost WhatsApp accounts and chats
+              </p>
+              <ul class="boost-packages">
+                <li>
+                  <i class="fas fa-check"></i>
+                  Basic Recovery - Rs. 3000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  Full Recovery with Chats - Rs. 6000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  Business Account Recovery - Rs. 10000
+                </li>
+                <li>
+                  <i class="fas fa-check"></i>
+                  Urgent Recovery (24 hours) - Rs. 12000
+                </li>
+              </ul>
+              <div class="boost-price">
+                From Rs. 3000
+              </div>
+              <button class="boost-btn" data-service="WhatsApp Account Recovery">
+                Order Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Boost Images Gallery Section -->
+    <section class="boost-section" id="boost-gallery">
+      <div class="container">
+        <h2 class="section-title">
+          Our Boost Results
+        </h2>
+        <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">
+          See the amazing results our clients have achieved with our social media boost services
+        </p>
+        <div class="boost-images-gallery">
+          <!-- Boost images will be generated by JavaScript -->
+        </div>
+      </div>
+    </section>
+    <!-- Boost Order Form Section -->
+    <section class="boost-order-section" id="boost-order">
+      <div class="container">
+        <h2 class="section-title">
+          Order Social Media Boost
+        </h2>
+        <div class="boost-order-container">
+          <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">
+            Place Your Boost Order via WhatsApp
+          </h3>
+          <form class="boost-order-form" id="boostOrderForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="boost-name">
+                  <i class="fas fa-user"></i>
+                  Full Name
+                </label>
+                <input type="text" id="boost-name" name="name" required="" placeholder="Enter your full name" />
+              </div>
+              <div class="form-group">
+                <label for="boost-phone">
+                  <i class="fas fa-phone"></i>
+                  WhatsApp Number
+                </label>
+                <input type="tel" id="boost-phone" name="phone" required="" placeholder="Enter your WhatsApp number" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="boost-platform">
+                  <i class="fas fa-globe"></i>
+                  Select Platform
+                </label>
+                <select id="boost-platform" name="platform" required="">
+                  <option value="">
+                    -- Select platform --
+                  </option>
+                  <option value="facebook">
+                    Facebook
+                  </option>
+                  <option value="instagram">
+                    Instagram
+                  </option>
+                  <option value="tiktok">
+                    TikTok
+                  </option>
+                  <option value="youtube">
+                    YouTube
+                  </option>
+                  <option value="recovery">
+                    Account Recovery
+                  </option>
+                  <option value="other">
+                    Other
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="boost-service">
+                  <i class="fas fa-cogs"></i>
+                  Select Service
+                </label>
+                <select id="boost-service" name="service" required="">
+                  <option value="">
+                    -- Select service --
+                  </option>
+                  <option value="likes">
+                    Likes
+                  </option>
+                  <option value="followers">
+                    Followers/Subscribers
+                  </option>
+                  <option value="views">
+                    Views
+                  </option>
+                  <option value="recovery">
+                    Account Recovery
+                  </option>
+                  <option value="custom">
+                    Custom Package
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="boost-quantity">
+                  <i class="fas fa-hashtag"></i>
+                  Quantity
+                </label>
+                <input type="text" id="boost-quantity" name="quantity" required="" placeholder="e.g., 1000 followers, 5000 views" />
+              </div>
+              <div class="form-group">
+                <label for="boost-budget">
+                  <i class="fas fa-money-bill"></i>
+                  Your Budget (Optional)
+                </label>
+                <input type="text" id="boost-budget" name="budget" placeholder="Enter your budget in Rs." />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="boost-message">
+                <i class="fas fa-comment"></i>
+                Additional Details
+              </label>
+              <textarea id="boost-message" name="message" placeholder="Provide details like profile link, specific requirements, etc.">
+              </textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              <i class="fab fa-whatsapp"></i>
+              Send Boost Order
+            </button>
+          </form>
+          <div class="whatsapp-info">
+            <h4>
+              <i class="fab fa-whatsapp"></i>
+              Direct WhatsApp Order
+            </h4>
+            <p>
+              You can also send your order directly to our WhatsApp numbers:
+            </p>
+            <div class="contact-numbers">
+              <div class="contact-number">
+                <div class="whatsapp-number">
+                  +94 71 932 0832
+                </div>
+              </div>
+              <div class="contact-number">
+                <div class="whatsapp-number">
+                  +94 76 420 7978
+                </div>
+              </div>
+            </div>
+            <p style="margin-top: 1rem;">
+              We&#39;ll contact you within 30 minutes with package details and pricing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Course Order Section -->
+    <section class="order-section" id="order">
+      <div class="container">
+        <h2 class="section-title">
+          Order Courses
+        </h2>
+        <div class="boost-order-container">
+          <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">
+            Place Your Course Order via WhatsApp
+          </h3>
+          <form class="boost-order-form" id="courseOrderForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="course-name">
+                  <i class="fas fa-user"></i>
+                  Full Name
+                </label>
+                <input type="text" id="course-name" name="name" required="" placeholder="Enter your full name" />
+              </div>
+              <div class="form-group">
+                <label for="course-phone">
+                  <i class="fas fa-phone"></i>
+                  Phone Number
+                </label>
+                <input type="tel" id="course-phone" name="phone" required="" placeholder="Enter your WhatsApp number" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="course-email">
+                  <i class="fas fa-envelope"></i>
+                  Email Address
+                </label>
+                <input type="email" id="course-email" name="email" required="" placeholder="Enter your email address" />
+              </div>
+              <div class="form-group">
+                <label for="course-country">
+                  <i class="fas fa-globe"></i>
+                  Country
+                </label>
+                <input type="text" id="course-country" name="country" required="" placeholder="Enter your country" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="course">
+                <i class="fas fa-book"></i>
+                Select Course Category
+              </label>
+              <select id="course" name="course" required="">
+                <option value="">
+                  -- Select a course category --
+                </option>
+                <option value="dark-web-kali-linux">
+                  DARK WEB, KALI LINUX, TERMUX LEARNING
+                </option>
+                <option value="computer-mobile-hacking">
+                  COMPUTER HACKING, MOBILE HACKING
+                </option>
+                <option value="android-wifi-hacking">
+                  ANDROID HACKING, WIFI HACKING COURSES
+                </option>
+                <option value="social-media-hacking">
+                  SOCIAL MEDIA HACKING
+                </option>
+                <option value="facebook-whatsapp">
+                  FACEBOOK, WHATSAPP HACKING
+                </option>
+                <option value="instagram-twitter">
+                  INSTAGRAM, TWITTER HACKING
+                </option>
+                <option value="password-cracking">
+                  PASSWORD CRACKING METHODS
+                </option>
+                <option value="carding">
+                  CARDING COMPLETE COURSE
+                </option>
+                <option value="web-wireless">
+                  HACKING WEB APPLICATIONS, WIRELESS HACKING
+                </option>
+                <option value="expert-hacker">
+                  BECOME A COMPLETE EXPERT HACKER
+                </option>
+                <option value="networking">
+                  COMPUTER NETWORKING FUNDAMENTALS
+                </option>
+                <option value="linux-hacking">
+                  LINUX FOR HACKING
+                </option>
+                <option value="methodology">
+                  HACKING METHODOLOGY
+                </option>
+                <option value="applications">
+                  APPLICATIONS HACKING
+                </option>
+                <option value="windows">
+                  WINDOWS HACKING
+                </option>
+                <option value="web-wifi">
+                  WEB APPLICATIONS &amp; WI-FI HACKING
+                </option>
+                <option value="ethical-penetration">
+                  ETHICAL HACKING AND PENETRATION TESTING
+                </option>
+                <option value="cyber-laws">
+                  CYBER SECURITY LAWS AND ETHICS
+                </option>
+                <option value="security-operations">
+                  SECURITY OPERATIONS AND MONITORING
+                </option>
+                <option value="case-study">
+                  CASE STUDY ANALYSIS IN ETHICAL HACKING
+                </option>
+                <option value="final-project">
+                  FINAL PROJECT &amp; EXAM
+                </option>
+                <option value="all-courses">
+                  ALL 100+ COURSES COMPLETE PACKAGE
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="course-message">
+                <i class="fas fa-comment"></i>
+                Additional Message (Optional)
+              </label>
+              <textarea id="course-message" name="message" placeholder="Any specific requirements or questions...">
+              </textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              <i class="fab fa-whatsapp"></i>
+              Order Course
+            </button>
+          </form>
+          <div class="whatsapp-info">
+            <h4>
+              <i class="fab fa-whatsapp"></i>
+              WhatsApp Order Numbers
+            </h4>
+            <div class="contact-numbers">
+              <div class="contact-number" style="min-width: 200px;">
+                <div class="whatsapp-number">
+                  +94 71 932 0832
+                </div>
+              </div>
+              <div class="contact-number" style="min-width: 200px;">
+                <div class="whatsapp-number">
+                  +94 76 420 7978
+                </div>
+              </div>
+            </div>
+            <p style="margin-top: 1rem;">
+              Your order will be sent directly to our WhatsApp number. We&#39;ll contact you within 24 hours with course access details.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <h2 class="section-title">
+          Why Choose Us
+        </h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-number">
+              01
+            </div>
+            <h3>
+              <i class="fas fa-check-circle feature-icon"></i>
+              Real &amp; Active Profiles
+            </h3>
+            <p>
+              We provide real, active social media profiles for all boost services, ensuring genuine engagement and growth.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-number">
+              02
+            </div>
+            <h3>
+              <i class="fas fa-bolt feature-icon"></i>
+              Instant Delivery
+            </h3>
+            <p>
+              Most boost services are delivered instantly or within 24 hours, depending on the package size.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-number">
+              03
+            </div>
+            <h3>
+              <i class="fas fa-shield-alt feature-icon"></i>
+              Safe &amp; Secure
+            </h3>
+            <p>
+              All services are delivered safely without risking your account security or violating platform terms.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-number">
+              04
+            </div>
+            <h3>
+              <i class="fas fa-headset feature-icon"></i>
+              24/7 Support
+            </h3>
+            <p>
+              Get help whenever you need it with our 24/7 support system via WhatsApp and Telegram.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-number">
+              05
+            </div>
+            <h3>
+              <i class="fas fa-users feature-icon"></i>
+              Sri Lanka Audience
+            </h3>
+            <p>
+              Special packages available with Sri Lanka audience targeting for local business growth.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-number">
+              06
+            </div>
+            <h3>
+              <i class="fas fa-money-bill-wave feature-icon"></i>
+              Best Prices
+            </h3>
+            <p>
+              Competitive pricing with the best value for money in the social media boost industry.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Social Media Section -->
+    <section class="social-section" id="social">
+      <div class="container social-container">
+        <h2 class="section-title">
+          Connect With Me
+        </h2>
+        <p>
+          Follow on social media for updates, hacking tips, free resources, and exclusive content
+        </p>
+        <div class="social-links">
+          <!-- Social links will be generated by JavaScript -->
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <div class="footer-logo">
+              <i class="fas fa-user-secret"></i>
+              RUKI PROGRAMMER
+            </div>
+            <p>
+              Ethical Hacking &amp; Cyber Security Training Platform providing comprehensive courses and social media boost services.
+            </p>
+            <div class="social-links" style="grid-template-columns: repeat(4, 1fr); margin-top: 20px;">
+              <!-- Mini social links will be added by JavaScript -->
+            </div>
+          </div>
+          <div class="footer-column">
+            <h3>
+              Quick Links
+            </h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#home">                <i class="fas fa-chevron-right"></i>
+                Home
+</a>
+              </li>
+              <li>
+                <a href="#courses">                <i class="fas fa-chevron-right"></i>
+                All Courses
+</a>
+              </li>
+              <li>
+                <a href="#services">                <i class="fas fa-chevron-right"></i>
+                Our Services
+</a>
+              </li>
+              <li>
+                <a href="#boost">                <i class="fas fa-chevron-right"></i>
+                Social Boost
+</a>
+              </li>
+              <li>
+                <a href="#order">                <i class="fas fa-chevron-right"></i>
+                Order Courses
+</a>
+              </li>
+              <li>
+                <a href="#boost-order">                <i class="fas fa-chevron-right"></i>
+                Order Boost
+</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>
+              Boost Services
+            </h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#boost">                <i class="fas fa-chevron-right"></i>
+                Facebook Boost
+</a>
+              </li>
+              <li>
+                <a href="#boost">                <i class="fas fa-chevron-right"></i>
+                Instagram Boost
+</a>
+              </li>
+              <li>
+                <a href="#boost">                <i class="fas fa-chevron-right"></i>
+                TikTok Boost
+</a>
+              </li>
+              <li>
+                <a href="#boost">                <i class="fas fa-chevron-right"></i>
+                YouTube Boost
+</a>
+              </li>
+              <li>
+                <a href="#boost">                <i class="fas fa-chevron-right"></i>
+                Account Recovery
+</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>
+              Contact Info
+            </h3>
+            <ul class="footer-links">
+              <li>
+                <a href="tel:94719320832">                <i class="fab fa-whatsapp"></i>
+                +94 71 932 0832
+</a>
+              </li>
+              <li>
+                <a href="tel:94764207978">                <i class="fab fa-whatsapp"></i>
+                +94 76 420 7978
+</a>
+              </li>
+              <li>
+                <a href="mailto:contact@rukiprogrammer.com">                <i class="fas fa-envelope"></i>
+                contact@rukiprogrammer.com
+</a>
+              </li>
+              <li>
+                <a href="#">                <i class="fas fa-map-marker-alt"></i>
+                Colombo, Sri Lanka
+</a>
+              </li>
+              <li>
+                <a href="#">                <i class="fas fa-clock"></i>
+                24/7 Support Available
+</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            ©
+            <span id="current-year"></span>
+            Ruki Programmer. All rights reserved.
+          </p>
+          <div class="copyright">
+            Disclaimer: All social media boost services use legitimate methods. Account recovery services are for legitimate account owners only.
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Modal for Course Details -->
+    <div class="modal" id="courseModal">
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose">
+          ×
+        </button>
+        <h2 class="modal-title" id="modalCourseTitle">
+        </h2>
+        <p class="modal-description" id="modalCourseDescription">
+        </p>
+        <div class="modal-features">
+          <h4>
+            <i class="fas fa-star"></i>
+            What You&#39;ll Learn:
+          </h4>
+          <ul id="modalCourseFeatures">
+          </ul>
+        </div>
+        <div class="modal-features">
+          <h4>
+            <i class="fas fa-cogs"></i>
+            Course Includes:
+          </h4>
+          <ul id="modalCourseIncludes">
+          </ul>
+        </div>
+        <div class="modal-price" id="modalCoursePrice">
+        </div>
+        <button class="modal-order-btn" id="modalOrderBtn">
+          <i class="fab fa-whatsapp"></i>
+          Order This Course Now
+        </button>
+        <p style="text-align: center; margin-top: 1rem; color: #b0b0b0;">
+          Click to send WhatsApp message with course details
+        </p>
+      </div>
+    </div>
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">
+      <i class="fas fa-chevron-up"></i>
+    </div>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js">
+    </script>
+    <script>
+      // ==================== SIMPLIFIED MUSIC PLAYER ====================
+        const backgroundMusic = document.getElementById(&#39;backgroundMusic&#39;);
+        const musicToggle = document.getElementById(&#39;musicToggle&#39;);
+        const musicLabel = document.getElementById(&#39;musicLabel&#39;);
+        const musicIcon = musicToggle.querySelector(&#39;i&#39;);
+
+        // Initialize music settings from localStorage or default
+        let isMuted = localStorage.getItem(&#39;musicMuted&#39;) === &#39;true&#39;;
+
+        // Set initial state
+        if (isMuted) {
+            backgroundMusic.muted = true;
+            musicToggle.classList.add(&#39;muted&#39;);
+            musicIcon.classList.remove(&#39;fa-volume-up&#39;);
+            musicIcon.classList.add(&#39;fa-volume-mute&#39;);
+            musicLabel.textContent = &#39;MUSIC OFF&#39;;
+        } else {
+            musicLabel.textContent = &#39;MUSIC ON&#39;;
+        }
+
+        // Toggle mute/unmute
+        musicToggle.addEventListener(&#39;click&#39;, function() {
+            isMuted = !isMuted;
+            backgroundMusic.muted = isMuted;
+            
+            if (isMuted) {
+                musicToggle.classList.add(&#39;muted&#39;);
+                musicIcon.classList.remove(&#39;fa-volume-up&#39;);
+                musicIcon.classList.add(&#39;fa-volume-mute&#39;);
+                musicLabel.textContent = &#39;MUSIC OFF&#39;;
+            } else {
+                musicToggle.classList.remove(&#39;muted&#39;);
+                musicIcon.classList.remove(&#39;fa-volume-mute&#39;);
+                musicIcon.classList.add(&#39;fa-volume-up&#39;);
+                musicLabel.textContent = &#39;MUSIC ON&#39;;
+                // Ensure music plays when unmuted
+                if (backgroundMusic.paused) {
+                    backgroundMusic.play().catch(e =&gt; console.log(&#34;Play prevented:&#34;, e));
+                }
+            }
+            
+            // Save to localStorage
+            localStorage.setItem(&#39;musicMuted&#39;, isMuted);
+        });
+
+        // Auto play music when page loads (with user interaction requirement)
+        document.addEventListener(&#39;click&#39;, function initializeMusic() {
+            if (!backgroundMusic.played.length &gt; 0 &amp;&amp; !isMuted) {
+                backgroundMusic.play().catch(e =&gt; console.log(&#34;Autoplay prevented:&#34;, e));
+            }
+            document.removeEventListener(&#39;click&#39;, initializeMusic);
+        });
+
+        // ==================== MATRIX BACKGROUND ====================
+        const canvas = document.getElementById(&#39;matrix-bg&#39;);
+        const ctx = canvas.getContext(&#39;2d&#39;);
+
+        // Set canvas dimensions
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Matrix characters
+        const matrixChars = &#34;01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン&#34;;
+        const charsArray = matrixChars.split(&#34;&#34;);
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        // Initialize drops
+        for (let i = 0; i &lt; columns; i++) {
+            drops[i] = Math.floor(Math.random() * canvas.height / fontSize) * fontSize;
+        }
+
+        // Matrix animation function
+        function drawMatrix() {
+            // Semi-transparent black rectangle for trail effect
+            ctx.fillStyle = &#34;rgba(0, 10, 0, 0.05)&#34;;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = &#34;#00ff41&#34;;
+            ctx.font = `${fontSize}px &#39;Share Tech Mono&#39;, monospace`;
+
+            for (let i = 0; i &lt; drops.length; i++) {
+                // Random character
+                const char = charsArray[Math.floor(Math.random() * charsArray.length)];
+                
+                // Draw character
+                ctx.fillText(char, i * fontSize, drops[i]);
+                
+                // Move drop down
+                if (drops[i] * fontSize &gt; canvas.height &amp;&amp; Math.random() &gt; 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i] += fontSize;
+            }
+        }
+
+        // Animation loop
+        let matrixInterval = setInterval(drawMatrix, 50);
+
+        // Handle window resize
+        window.addEventListener(&#39;resize&#39;, function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            // Reinitialize drops
+            drops.length = 0;
+            for (let i = 0; i &lt; Math.floor(canvas.width / fontSize); i++) {
+                drops[i] = Math.floor(Math.random() * canvas.height / fontSize) * fontSize;
+            }
+        });
+
+        // ==================== PARTICLES BACKGROUND ====================
+        particlesJS(&#34;particles-js&#34;, {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: &#34;#00ff00&#34; },
+                shape: { type: &#34;circle&#34; },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: &#34;#00cc00&#34;,
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: &#34;none&#34;,
+                    random: true,
+                    straight: false,
+                    out_mode: &#34;out&#34;,
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: &#34;canvas&#34;,
+                events: {
+                    onhover: { enable: true, mode: &#34;repulse&#34; },
+                    onclick: { enable: true, mode: &#34;push&#34; }
+                }
+            },
+            retina_detect: true
+        });
+
+        // ==================== DATA AND INITIALIZATION ====================
+        // Services Data (Course Services)
+        const services = [
+            { 
+                title: &#34;100+ PAID COURSES&#34;, 
+                description: &#34;Complete access to all 100+ premium ethical hacking and cyber security courses with lifetime updates and support.&#34;,
+                icon: &#34;fas fa-graduation-cap&#34;
+            },
+            { 
+                title: &#34;DARK WEB, KALI LINUX, TERMUX LEARNING&#34;, 
+                description: &#34;Master Dark Web navigation, Kali Linux tools, and Termux mobile hacking platform with practical hands-on training.&#34;,
+                icon: &#34;fas fa-user-secret&#34;
+            },
+            { 
+                title: &#34;COMPUTER HACKING, MOBILE HACKING&#34;, 
+                description: &#34;Comprehensive training in computer system penetration testing and mobile device security assessment techniques.&#34;,
+                icon: &#34;fas fa-laptop&#34;
+            },
+            { 
+                title: &#34;ANDROID HACKING, WIFI HACKING COURSES&#34;, 
+                description: &#34;Specialized courses in Android application security testing and wireless network penetration methodologies.&#34;,
+                icon: &#34;fas fa-wifi&#34;
+            },
+            { 
+                title: &#34;SOCIAL MEDIA HACKING&#34;, 
+                description: &#34;Learn social media platform security testing, account protection methods, and social engineering countermeasures.&#34;,
+                icon: &#34;fas fa-share-alt&#34;
+            },
+            { 
+                title: &#34;FACEBOOK, WHATSAPP HACKING&#34;, 
+                description: &#34;In-depth security analysis of Facebook and WhatsApp platforms with ethical hacking methodologies.&#34;,
+                icon: &#34;fab fa-facebook&#34;
+            },
+            { 
+                title: &#34;INSTAGRAM, TWITTER HACKING&#34;, 
+                description: &#34;Security testing techniques for Instagram and Twitter platforms including vulnerability assessment.&#34;,
+                icon: &#34;fab fa-instagram&#34;
+            },
+            { 
+                title: &#34;PASSWORD CRACKING METHODS&#34;, 
+                description: &#34;Master password cracking techniques, hash analysis, and cryptographic attack methodologies.&#34;,
+                icon: &#34;fas fa-key&#34;
+            },
+            { 
+                title: &#34;CARDING COMPLETE COURSE&#34;, 
+                description: &#34;Understanding carding techniques for security professionals to protect against financial fraud.&#34;,
+                icon: &#34;fas fa-credit-card&#34;
+            },
+            { 
+                title: &#34;HACKING WEB APPLICATIONS, WIRELESS HACKING&#34;, 
+                description: &#34;Comprehensive web application security testing and wireless network penetration training.&#34;,
+                icon: &#34;fas fa-globe&#34;
+            }
+        ];
+
+        // Courses Data (for courses section)
+        const courses = [
+            { 
+                title: &#34;DARK WEB, KALI LINUX, TERMUX LEARNING&#34;, 
+                icon: &#34;fas fa-user-secret&#34;, 
+                level: &#34;Beginner&#34;,
+                description: &#34;Complete course on Dark Web navigation, Kali Linux tools, and Termux mobile hacking platform. Learn to access the dark web safely, use Kali Linux penetration testing tools, and master Termux for mobile hacking.&#34;,
+                price: &#34;Rs. 5000&#34;,
+                features: [
+                    &#34;Dark Web basics and safety protocols&#34;,
+                    &#34;Kali Linux installation and setup&#34;,
+                    &#34;Essential Kali Linux tools overview&#34;,
+                    &#34;Termux installation and configuration&#34;,
+                    &#34;Mobile hacking with Termux&#34;,
+                    &#34;Anonymity and privacy techniques&#34;
+                ],
+                includes: [
+                    &#34;30+ hours of video content&#34;,
+                    &#34;Practical exercises and labs&#34;,
+                    &#34;Downloadable resources&#34;,
+                    &#34;Lifetime access&#34;,
+                    &#34;Certificate of completion&#34;
+                ]
+            },
+            { 
+                title: &#34;COMPUTER HACKING, MOBILE HACKING&#34;, 
+                icon: &#34;fas fa-laptop&#34;, 
+                level: &#34;Intermediate&#34;,
+                description: &#34;Master computer and mobile device penetration testing. Learn system vulnerabilities, exploitation techniques, and security assessment methodologies for both computers and mobile devices.&#34;,
+                price: &#34;Rs. 6000&#34;,
+                features: [
+                    &#34;Computer system vulnerabilities&#34;,
+                    &#34;Mobile device security assessment&#34;,
+                    &#34;Exploitation frameworks&#34;,
+                    &#34;Network penetration testing&#34;,
+                    &#34;Reverse engineering basics&#34;,
+                    &#34;Malware analysis fundamentals&#34;
+                ],
+                includes: [
+                    &#34;40+ hours of video content&#34;,
+                    &#34;Real-world case studies&#34;,
+                    &#34;Hands-on labs&#34;,
+                    &#34;Tools and scripts&#34;,
+                    &#34;Community access&#34;
+                ]
+            },
+            { 
+                title: &#34;ANDROID HACKING, WIFI HACKING COURSES&#34;, 
+                icon: &#34;fas fa-wifi&#34;, 
+                level: &#34;Intermediate&#34;,
+                description: &#34;Specialized course focusing on Android application security and wireless network penetration testing. Learn to test Android apps and secure wireless networks.&#34;,
+                price: &#34;Rs. 5500&#34;,
+                features: [
+                    &#34;Android application security testing&#34;,
+                    &#34;WiFi network penetration&#34;,
+                    &#34;Wireless security protocols&#34;,
+                    &#34;Man-in-the-middle attacks&#34;,
+                    &#34;Password cracking techniques&#34;,
+                    &#34;Network sniffing and analysis&#34;
+                ],
+                includes: [
+                    &#34;35+ hours of video content&#34;,
+                    &#34;Practical WiFi hacking labs&#34;,
+                    &#34;Android testing environments&#34;,
+                    &#34;Security tools collection&#34;,
+                    &#34;Expert support&#34;
+                ]
+            },
+            { 
+                title: &#34;SOCIAL MEDIA HACKING&#34;, 
+                icon: &#34;fas fa-share-alt&#34;, 
+                level: &#34;Intermediate&#34;,
+                description: &#34;Learn ethical hacking techniques for social media platforms. Understand security vulnerabilities and protection methods for popular social networks.&#34;,
+                price: &#34;Rs. 4500&#34;,
+                features: [
+                    &#34;Social media platform vulnerabilities&#34;,
+                    &#34;Account security assessment&#34;,
+                    &#34;Social engineering techniques&#34;,
+                    &#34;Password recovery methods&#34;,
+                    &#34;Privacy protection strategies&#34;,
+                    &#34;Two-factor authentication bypass&#34;
+                ],
+                includes: [
+                    &#34;25+ hours of video content&#34;,
+                    &#34;Case studies and examples&#34;,
+                    &#34;Security assessment tools&#34;,
+                    &#34;Protection guidelines&#34;,
+                    &#34;Regular updates&#34;
+                ]
+            },
+            { 
+                title: &#34;FACEBOOK, WHATSAPP HACKING&#34;, 
+                icon: &#34;fab fa-facebook&#34;, 
+                level: &#34;Advanced&#34;,
+                description: &#34;Advanced security testing course for Facebook and WhatsApp platforms. Learn ethical hacking methodologies for these popular messaging and social platforms.&#34;,
+                price: &#34;Rs. 7000&#34;,
+                features: [
+                    &#34;Facebook security vulnerabilities&#34;,
+                    &#34;WhatsApp encryption analysis&#34;,
+                    &#34;Account penetration testing&#34;,
+                    &#34;Message interception techniques&#34;,
+                    &#34;Privacy bypass methods&#34;,
+                    &#34;Security best practices&#34;
+                ],
+                includes: [
+                    &#34;45+ hours of video content&#34;,
+                    &#34;Advanced penetration labs&#34;,
+                    &#34;Encryption analysis tools&#34;,
+                    &#34;Expert mentorship&#34;,
+                    &#34;Certificate of expertise&#34;
+                ]
+            },
+            { 
+                title: &#34;INSTAGRAM, TWITTER HACKING&#34;, 
+                icon: &#34;fab fa-instagram&#34;, 
+                level: &#34;Advanced&#34;,
+                description: &#34;Comprehensive security testing course for Instagram and Twitter. Learn to identify and exploit vulnerabilities in these social media giants.&#34;,
+                price: &#34;Rs. 6500&#34;,
+                features: [
+                    &#34;Instagram security assessment&#34;,
+                    &#34;Twitter API vulnerabilities&#34;,
+                    &#34;Account takeover techniques&#34;,
+                    &#34;Data extraction methods&#34;,
+                    &#34;Privacy protection bypass&#34;,
+                    &#34;Automated testing tools&#34;
+                ],
+                includes: [
+                    &#34;40+ hours of video content&#34;,
+                    &#34;Real platform testing&#34;,
+                    &#34;Custom testing tools&#34;,
+                    &#34;API security analysis&#34;,
+                    &#34;Community forum access&#34;
+                ]
+            },
+            { 
+                title: &#34;PASSWORD CRACKING METHODS&#34;, 
+                icon: &#34;fas fa-key&#34;, 
+                level: &#34;Intermediate&#34;,
+                description: &#34;Master the art of password cracking using various techniques and tools. Learn both offensive and defensive password security strategies.&#34;,
+                price: &#34;Rs. 4000&#34;,
+                features: [
+                    &#34;Password hash analysis&#34;,
+                    &#34;Brute force techniques&#34;,
+                    &#34;Dictionary attacks&#34;,
+                    &#34;Rainbow table usage&#34;,
+                    &#34;Password policy analysis&#34;,
+                    &#34;Security countermeasures&#34;
+                ],
+                includes: [
+                    &#34;30+ hours of video content&#34;,
+                    &#34;Password cracking tools&#34;,
+                    &#34;Custom wordlists&#34;,
+                    &#34;Hash databases&#34;,
+                    &#34;Practical exercises&#34;
+                ]
+            },
+            { 
+                title: &#34;CARDING COMPLETE COURSE&#34;, 
+                icon: &#34;fas fa-credit-card&#34;, 
+                level: &#34;Advanced&#34;,
+                description: &#34;Understand carding techniques for security professionals. Learn to protect against financial fraud and understand payment system vulnerabilities.&#34;,
+                price: &#34;Rs. 8000&#34;,
+                features: [
+                    &#34;Payment system vulnerabilities&#34;,
+                    &#34;Credit card fraud prevention&#34;,
+                    &#34;Transaction security analysis&#34;,
+                    &#34;Fraud detection methods&#34;,
+                    &#34;Legal and ethical considerations&#34;,
+                    &#34;Security compliance standards&#34;
+                ],
+                includes: [
+                    &#34;50+ hours of video content&#34;,
+                    &#34;Case studies and examples&#34;,
+                    &#34;Security assessment frameworks&#34;,
+                    &#34;Compliance guidelines&#34;,
+                    &#34;Expert certification&#34;
+                ]
+            },
+            { 
+                title: &#34;HACKING WEB APPLICATIONS, WIRELESS HACKING&#34;, 
+                icon: &#34;fas fa-globe&#34;, 
+                level: &#34;Advanced&#34;,
+                description: &#34;Comprehensive course covering both web application security testing and wireless network penetration methodologies.&#34;,
+                price: &#34;Rs. 7500&#34;,
+                features: [
+                    &#34;Web application vulnerabilities&#34;,
+                    &#34;SQL injection techniques&#34;,
+                    &#34;Cross-site scripting (XSS)&#34;,
+                    &#34;Wireless network security&#34;,
+                    &#34;Router penetration testing&#34;,
+                    &#34;Security assessment frameworks&#34;
+                ],
+                includes: [
+                    &#34;55+ hours of video content&#34;,
+                    &#34;Web app testing labs&#34;,
+                    &#34;Wireless hacking tools&#34;,
+                    &#34;Real-world scenarios&#34;,
+                    &#34;Professional certification&#34;
+                ]
+            },
+            { 
+                title: &#34;BECOME A COMPLETE EXPERT HACKER&#34;, 
+                icon: &#34;fas fa-graduation-cap&#34;, 
+                level: &#34;All Levels&#34;,
+                description: &#34;The ultimate comprehensive course covering all aspects of ethical hacking and cybersecurity. From beginner to expert level training.&#34;,
+                price: &#34;Rs. 15000&#34;,
+                features: [
+                    &#34;Complete ethical hacking curriculum&#34;,
+                    &#34;All penetration testing methodologies&#34;,
+                    &#34;Advanced exploitation techniques&#34;,
+                    &#34;Network security assessment&#34;,
+                    &#34;Mobile and web application testing&#34;,
+                    &#34;Career guidance and certification&#34;
+                ],
+                includes: [
+                    &#34;200+ hours of video content&#34;,
+                    &#34;All previous courses included&#34;,
+                    &#34;One-on-one mentorship&#34;,
+                    &#34;Certification exam&#34;,
+                    &#34;Job placement assistance&#34;
+                ]
+            }
+        ];
+
+        // Boost Images Data
+        const boostImages = [
+            {
+                src: &#34;https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=2069&amp;q=80&#34;,
+                title: &#34;Facebook Growth Results&#34;,
+                description: &#34;Client achieved 10,000+ followers in 7 days&#34;
+            },
+            {
+                src: &#34;https://images.unsplash.com/photo-1611944212129-29977ae1398c?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1974&amp;q=80&#34;,
+                title: &#34;Instagram Success Story&#34;,
+                description: &#34;500% increase in engagement rates&#34;
+            },
+            {
+                src: &#34;https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1974&amp;q=80&#34;,
+                title: &#34;TikTok Viral Growth&#34;,
+                description: &#34;1M+ views within 24 hours&#34;
+            },
+            {
+                src: &#34;https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=2076&amp;q=80&#34;,
+                title: &#34;YouTube Channel Boost&#34;,
+                description: &#34;From 100 to 10,000 subscribers in 30 days&#34;
+            },
+            {
+                src: &#34;https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1974&amp;q=80&#34;,
+                title: &#34;Account Recovery Success&#34;,
+                description: &#34;100% success rate for hacked account recovery&#34;
+            },
+            {
+                src: &#34;https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1974&amp;q=80&#34;,
+                title: &#34;Business Profile Growth&#34;,
+                description: &#34;Local business increased sales by 300%&#34;
+            }
+        ];
+
+        // Social Media Links
+        const socialLinks = [
+            { name: &#34;YouTube&#34;, icon: &#34;fab fa-youtube&#34;, url: &#34;https://youtube.com/@rukiprogrammer-dg4sp?si=23nqVSzyi5vTrQGn&#34;, color: &#34;#FF0000&#34; },
+            { name: &#34;Facebook&#34;, icon: &#34;fab fa-facebook&#34;, url: &#34;https://www.facebook.com/rukshan.shaminda.rajapaksha&#34;, color: &#34;#1877F2&#34; },
+            { name: &#34;WhatsApp 1&#34;, icon: &#34;fab fa-whatsapp&#34;, url: &#34;https://wa.me/94719320832&#34;, color: &#34;#25D366&#34; },
+            { name: &#34;WhatsApp 2&#34;, icon: &#34;fab fa-whatsapp&#34;, url: &#34;https://wa.me/94764207978&#34;, color: &#34;#25D366&#34; },
+            { name: &#34;Instagram&#34;, icon: &#34;fab fa-instagram&#34;, url: &#34;#&#34;, color: &#34;#E4405F&#34; },
+            { name: &#34;TikTok&#34;, icon: &#34;fab fa-tiktok&#34;, url: &#34;#&#34;, color: &#34;#000000&#34; }
+        ];
+
+        // ==================== GENERATE DYNAMIC CONTENT ====================
+        // Generate Service Cards
+        const servicesGrid = document.querySelector(&#39;.services-grid&#39;);
+        services.forEach(service =&gt; {
+            const serviceCard = document.createElement(&#39;div&#39;);
+            serviceCard.className = &#39;service-card&#39;;
+            serviceCard.innerHTML = `
+                &lt;i class=&#34;${service.icon} service-icon&#34;&gt;&lt;/i&gt;
+                &lt;h3&gt;${service.title}&lt;/h3&gt;
+                &lt;p&gt;${service.description}&lt;/p&gt;
+            `;
+            servicesGrid.appendChild(serviceCard);
+        });
+
+        // Generate Course Cards (for courses section)
+        const coursesGrid = document.querySelector(&#39;.courses-grid&#39;);
+        courses.forEach((course, index) =&gt; {
+            const courseCard = document.createElement(&#39;div&#39;);
+            courseCard.className = &#39;course-card&#39;;
+            courseCard.setAttribute(&#39;data-course-index&#39;, index);
+            courseCard.innerHTML = `
+                &lt;h3&gt;&lt;i class=&#34;${course.icon} course-icon&#34;&gt;&lt;/i&gt; ${course.title}&lt;/h3&gt;
+                &lt;p&gt;${course.description.substring(0, 120)}...&lt;/p&gt;
+                &lt;span class=&#34;course-level&#34;&gt;${course.level}&lt;/span&gt;
+                &lt;button class=&#34;order-now-btn&#34; data-course-index=&#34;${index}&#34;&gt;
+                    &lt;i class=&#34;fas fa-shopping-cart&#34;&gt;&lt;/i&gt; Order Now - ${course.price}
+                &lt;/button&gt;
+            `;
+            coursesGrid.appendChild(courseCard);
+        });
+
+        // Generate Boost Images Gallery
+        const boostImagesGallery = document.querySelector(&#39;.boost-images-gallery&#39;);
+        boostImages.forEach(image =&gt; {
+            const imageItem = document.createElement(&#39;div&#39;);
+            imageItem.className = &#39;boost-image-item&#39;;
+            imageItem.innerHTML = `
+                &lt;div class=&#34;boost-image-title&#34;&gt;${image.title}&lt;/div&gt;
+                &lt;img src=&#34;${image.src}&#34; alt=&#34;${image.description}&#34; class=&#34;boost-image&#34;&gt;
+            `;
+            boostImagesGallery.appendChild(imageItem);
+        });
+
+        // Generate Social Links
+        const socialLinksContainer = document.querySelector(&#39;.social-links&#39;);
+        const footerSocialContainer = document.querySelector(&#39;.footer-column .social-links&#39;);
+        
+        socialLinks.forEach(link =&gt; {
+            // Main social links
+            const socialLink = document.createElement(&#39;a&#39;);
+            socialLink.className = &#39;social-link&#39;;
+            socialLink.href = link.url;
+            socialLink.target = &#34;_blank&#34;;
+            socialLink.innerHTML = `
+                &lt;i class=&#34;${link.icon} social-icon&#34; style=&#34;color: ${link.color}&#34;&gt;&lt;/i&gt;
+                &lt;span&gt;${link.name}&lt;/span&gt;
+            `;
+            socialLinksContainer.appendChild(socialLink);
+            
+            // Footer social links (mini)
+            const footerSocialLink = document.createElement(&#39;a&#39;);
+            footerSocialLink.className = &#39;social-link&#39;;
+            footerSocialLink.href = link.url;
+            footerSocialLink.target = &#34;_blank&#34;;
+            footerSocialLink.style.padding = &#34;10px&#34;;
+            footerSocialLink.innerHTML = `&lt;i class=&#34;${link.icon}&#34; style=&#34;color: ${link.color}&#34;&gt;&lt;/i&gt;`;
+            footerSocialContainer.appendChild(footerSocialLink);
+        });
+
+        // Set current year in footer
+        document.getElementById(&#39;current-year&#39;).textContent = new Date().getFullYear();
+
+        // ==================== MOBILE MENU FUNCTIONALITY ====================
+        const mobileMenuToggle = document.getElementById(&#39;mobileMenuToggle&#39;);
+        const navMenu = document.getElementById(&#39;navMenu&#39;);
+        
+        mobileMenuToggle.addEventListener(&#39;click&#39;, function() {
+            navMenu.classList.toggle(&#39;active&#39;);
+            // Change icon
+            const icon = this.querySelector(&#39;i&#39;);
+            if (navMenu.classList.contains(&#39;active&#39;)) {
+                icon.classList.remove(&#39;fa-bars&#39;);
+                icon.classList.add(&#39;fa-times&#39;);
+            } else {
+                icon.classList.remove(&#39;fa-times&#39;);
+                icon.classList.add(&#39;fa-bars&#39;);
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener(&#39;click&#39;, function(event) {
+            if (!navMenu.contains(event.target) &amp;&amp; !mobileMenuToggle.contains(event.target)) {
+                navMenu.classList.remove(&#39;active&#39;);
+                const icon = mobileMenuToggle.querySelector(&#39;i&#39;);
+                icon.classList.remove(&#39;fa-times&#39;);
+                icon.classList.add(&#39;fa-bars&#39;);
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll(&#39;nav a&#39;).forEach(link =&gt; {
+            link.addEventListener(&#39;click&#39;, function() {
+                navMenu.classList.remove(&#39;active&#39;);
+                const icon = mobileMenuToggle.querySelector(&#39;i&#39;);
+                icon.classList.remove(&#39;fa-times&#39;);
+                icon.classList.add(&#39;fa-bars&#39;);
+            });
+        });
+
+        // ==================== BOOST TABS FUNCTIONALITY ====================
+        const boostTabs = document.querySelectorAll(&#39;.boost-tab&#39;);
+        const boostContents = document.querySelectorAll(&#39;.boost-content&#39;);
+
+        boostTabs.forEach(tab =&gt; {
+            tab.addEventListener(&#39;click&#39;, () =&gt; {
+                const tabId = tab.getAttribute(&#39;data-tab&#39;);
+                
+                // Remove active class from all tabs
+                boostTabs.forEach(t =&gt; t.classList.remove(&#39;active&#39;));
+                // Add active class to clicked tab
+                tab.classList.add(&#39;active&#39;);
+                
+                // Hide all content
+                boostContents.forEach(content =&gt; content.classList.remove(&#39;active&#39;));
+                // Show selected content
+                document.getElementById(`${tabId}-content`).classList.add(&#39;active&#39;);
+            });
+        });
+
+        // ==================== COURSE MODAL FUNCTIONALITY ====================
+        // Course Card Click Event (Open Modal)
+        document.querySelectorAll(&#39;.course-card&#39;).forEach(card =&gt; {
+            card.addEventListener(&#39;click&#39;, function(e) {
+                // Don&#39;t open modal if clicking the order button
+                if (e.target.classList.contains(&#39;order-now-btn&#39;) || 
+                    e.target.closest(&#39;.order-now-btn&#39;)) {
+                    return;
+                }
+                
+                const courseIndex = this.getAttribute(&#39;data-course-index&#39;);
+                openCourseModal(courseIndex);
+            });
+        });
+
+        // Order Now Button Click Event
+        document.querySelectorAll(&#39;.order-now-btn&#39;).forEach(button =&gt; {
+            button.addEventListener(&#39;click&#39;, function(e) {
+                e.stopPropagation(); // Prevent triggering card click
+                const courseIndex = this.getAttribute(&#39;data-course-index&#39;);
+                openCourseModal(courseIndex);
+            });
+        });
+
+        // Function to open course modal
+        function openCourseModal(index) {
+            const course = courses[index];
+            const modal = document.getElementById(&#39;courseModal&#39;);
+            const modalTitle = document.getElementById(&#39;modalCourseTitle&#39;);
+            const modalDescription = document.getElementById(&#39;modalCourseDescription&#39;);
+            const modalFeatures = document.getElementById(&#39;modalCourseFeatures&#39;);
+            const modalIncludes = document.getElementById(&#39;modalCourseIncludes&#39;);
+            const modalPrice = document.getElementById(&#39;modalCoursePrice&#39;);
+            const modalOrderBtn = document.getElementById(&#39;modalOrderBtn&#39;);
+            
+            // Set modal content
+            modalTitle.textContent = course.title;
+            modalDescription.textContent = course.description;
+            modalPrice.textContent = course.price;
+            
+            // Clear previous features
+            modalFeatures.innerHTML = &#39;&#39;;
+            modalIncludes.innerHTML = &#39;&#39;;
+            
+            // Add features
+            course.features.forEach(feature =&gt; {
+                const li = document.createElement(&#39;li&#39;);
+                li.textContent = feature;
+                modalFeatures.appendChild(li);
+            });
+            
+            // Add includes
+            course.includes.forEach(include =&gt; {
+                const li = document.createElement(&#39;li&#39;);
+                li.textContent = include;
+                modalIncludes.appendChild(li);
+            });
+            
+            // Set order button data
+            modalOrderBtn.setAttribute(&#39;data-course-title&#39;, course.title);
+            modalOrderBtn.setAttribute(&#39;data-course-price&#39;, course.price);
+            
+            // Show modal
+            modal.style.display = &#39;flex&#39;;
+            
+            // Prevent body scrolling when modal is open
+            document.body.style.overflow = &#39;hidden&#39;;
+        }
+
+        // Close modal when clicking close button
+        document.getElementById(&#39;modalClose&#39;).addEventListener(&#39;click&#39;, function() {
+            const modal = document.getElementById(&#39;courseModal&#39;);
+            modal.style.display = &#39;none&#39;;
+            document.body.style.overflow = &#39;auto&#39;;
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener(&#39;click&#39;, function(event) {
+            const modal = document.getElementById(&#39;courseModal&#39;);
+            if (event.target === modal) {
+                modal.style.display = &#39;none&#39;;
+                document.body.style.overflow = &#39;auto&#39;;
+            }
+        });
+
+        // Modal Order Button Click Event
+        document.getElementById(&#39;modalOrderBtn&#39;).addEventListener(&#39;click&#39;, function() {
+            const courseTitle = this.getAttribute(&#39;data-course-title&#39;);
+            const coursePrice = this.getAttribute(&#39;data-course-price&#39;);
+            
+            // Format WhatsApp message
+            const whatsappMessage = `*Course Order - Ruki Programmer*%0A%0A` +
+                                   `📚 *Course:* ${courseTitle}%0A` +
+                                   `💰 *Price:* ${coursePrice}%0A` +
+                                   `💬 *Message:* I want to order the &#34;${courseTitle}&#34; course. Please send me payment details and course access information.%0A%0A` +
+                                   `&gt; Order placed via Ruki Programmer Website`;
+            
+            // WhatsApp API URL
+            const whatsappNumber = &#34;94719320832&#34;;
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, &#39;_blank&#39;);
+            
+            // Close modal
+            const modal = document.getElementById(&#39;courseModal&#39;);
+            modal.style.display = &#39;none&#39;;
+            document.body.style.overflow = &#39;auto&#39;;
+            
+            // Show success message
+            alert(`Opening WhatsApp to order &#34;${courseTitle}&#34;. Please complete the order process by sending the message.`);
+        });
+
+        // ==================== BOOST ORDER FUNCTIONALITY ====================
+        // Social Media Boost Order Buttons
+        document.querySelectorAll(&#39;.boost-btn&#39;).forEach(button =&gt; {
+            button.addEventListener(&#39;click&#39;, function() {
+                const service = this.getAttribute(&#39;data-service&#39;);
+                
+                // Format WhatsApp message for boost service
+                const whatsappMessage = `*Social Media Boost Order - Ruki Programmer*%0A%0A` +
+                                       `🔥 *Service:* ${service}%0A` +
+                                       `💬 *Message:* I want to order ${service} package. Please send me details and pricing.%0A%0A` +
+                                       `&gt; Order placed via Ruki Programmer Website`;
+                
+                // WhatsApp API URL
+                const whatsappNumber = &#34;94719320832&#34;;
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+                
+                // Open WhatsApp in new tab
+                window.open(whatsappUrl, &#39;_blank&#39;);
+                
+                // Show success message
+                alert(`Opening WhatsApp to order ${service}. Please complete the order process.`);
+            });
+        });
+
+        // Boost Order Form
+        document.getElementById(&#39;boostOrderForm&#39;).addEventListener(&#39;submit&#39;, function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById(&#39;boost-name&#39;).value;
+            const phone = document.getElementById(&#39;boost-phone&#39;).value;
+            const platform = document.getElementById(&#39;boost-platform&#39;).value;
+            const service = document.getElementById(&#39;boost-service&#39;).value;
+            const quantity = document.getElementById(&#39;boost-quantity&#39;).value;
+            const budget = document.getElementById(&#39;boost-budget&#39;).value;
+            const message = document.getElementById(&#39;boost-message&#39;).value;
+            
+            // Format WhatsApp message
+            const whatsappMessage = `*Social Media Boost Order - Ruki Programmer*%0A%0A` +
+                                   `😎 *Name:* ${name}%0A` +
+                                   `📞 *Phone:* ${phone}%0A` +
+                                   `📱 *Platform:* ${platform}%0A` +
+                                   `⚙️ *Service:* ${service}%0A` +
+                                   `🔢 *Quantity:* ${quantity}%0A` +
+                                   `💰 *Budget:* ${budget || &#39;Not specified&#39;}%0A` +
+                                   `📝 *Details:* ${message || &#39;No additional details&#39;}%0A%0A` +
+                                   `&gt; Order placed via Ruki Programmer Website`;
+            
+            // WhatsApp API URL
+            const whatsappNumber = &#34;94719320832&#34;;
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, &#39;_blank&#39;);
+            
+            // Show success message
+            alert(&#34;Opening WhatsApp to send your boost order. Please complete the order process by sending the message.&#34;);
+            
+            // Reset form
+            document.getElementById(&#39;boostOrderForm&#39;).reset();
+        });
+
+        // Course Order Form
+        document.getElementById(&#39;courseOrderForm&#39;).addEventListener(&#39;submit&#39;, function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById(&#39;course-name&#39;).value;
+            const phone = document.getElementById(&#39;course-phone&#39;).value;
+            const email = document.getElementById(&#39;course-email&#39;).value;
+            const country = document.getElementById(&#39;course-country&#39;).value;
+            const course = document.getElementById(&#39;course&#39;).value;
+            const courseText = document.getElementById(&#39;course&#39;).options[document.getElementById(&#39;course&#39;).selectedIndex].text;
+            const message = document.getElementById(&#39;course-message&#39;).value;
+            
+            // Format WhatsApp message
+            const whatsappMessage = `*Course Order - Ruki Programmer*%0A%0A` +
+                                   `😎 *Name:* ${name}%0A` +
+                                   `📞 *Phone:* ${phone}%0A` +
+                                   `📠 *Email:* ${email}%0A` +
+                                   `🌍 *Country:* ${country}%0A` +
+                                   `📚 *Course:* ${courseText}%0A` +
+                                   `📝 *Message:* ${message || &#39;No additional message&#39;}%0A%0A` +
+                                   `&gt; Order placed via Ruki Programmer Website`;
+            
+            // WhatsApp API URL
+            const whatsappNumber = &#34;94719320832&#34;;
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, &#39;_blank&#39;);
+            
+            // Show success message
+            alert(&#34;Opening WhatsApp to send your course order. Please complete the order process by sending the message.&#34;);
+            
+            // Reset form
+            document.getElementById(&#39;courseOrderForm&#39;).reset();
+        });
+
+        // ==================== ANIMATIONS AND OTHER FEATURES ====================
+        // Stats Counter Animation
+        function animateStats() {
+            const statNumbers = document.querySelectorAll(&#39;.stat-number&#39;);
+            statNumbers.forEach(stat =&gt; {
+                const target = parseInt(stat.getAttribute(&#39;data-count&#39;));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() =&gt; {
+                    current += increment;
+                    if (current &gt;= target) {
+                        stat.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current);
+                    }
+                }, 20);
+            });
+        }
+
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById(&#39;scrollTop&#39;);
+        
+        window.addEventListener(&#39;scroll&#39;, function() {
+            if (window.pageYOffset &gt; 300) {
+                scrollTopBtn.classList.add(&#39;active&#39;);
+            } else {
+                scrollTopBtn.classList.remove(&#39;active&#39;);
+            }
+        });
+
+        scrollTopBtn.addEventListener(&#39;click&#39;, function() {
+            window.scrollTo({
+                top: 0,
+                behavior: &#39;smooth&#39;
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll(&#39;nav a, .footer-links a&#39;).forEach(anchor =&gt; {
+            anchor.addEventListener(&#39;click&#39;, function(e) {
+                if (this.getAttribute(&#39;href&#39;).startsWith(&#39;#&#39;)) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute(&#39;href&#39;);
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: &#39;smooth&#39;
+                        });
+                    }
+                }
+            });
+        });
+
+        // Initialize animations when page loads
+        window.addEventListener(&#39;load&#39;, function() {
+            // Animate stats
+            setTimeout(animateStats, 500);
+            
+            // Add animation classes to elements
+            const animateElements = document.querySelectorAll(&#39;.course-card, .service-card, .feature-card, .boost-card, .boost-image-item&#39;);
+            animateElements.forEach((el, index) =&gt; {
+                setTimeout(() =&gt; {
+                    el.style.opacity = &#39;1&#39;;
+                    el.style.transform = &#39;translateY(0)&#39;;
+                }, index * 100);
+            });
+        });
+
+        // Initialize elements with opacity 0 for animation
+        document.querySelectorAll(&#39;.course-card, .service-card, .feature-card, .boost-card, .boost-image-item&#39;).forEach(el =&gt; {
+            el.style.opacity = &#39;0&#39;;
+            el.style.transform = &#39;translateY(20px)&#39;;
+            el.style.transition = &#39;opacity 0.5s ease, transform 0.5s ease&#39;;
+        });
+    </script>
+  </body>
+</html>
